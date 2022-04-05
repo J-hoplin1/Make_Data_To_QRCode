@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        h2,h4{
+            margin: 10px 0px;
+        }
+        body{
+            background-color: wheat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* min-height, min-width : 요소의 최소 너비 높이 지정*/
+            margin: 0;
+        }
+        .main-layout{
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            width: 800px;
+        }
+        .main-container{
+            padding: 30px 40px;
+            display: flex;
+            flex-direction: column; /* 세로 형식의 정렬*/
+            align-items: center;
+        }
+        .main-container h2{
+            display: flex;
+            text-align: center;
+        }
+        .qr-img{
+            width: 350px;
+            height: 350px;
+            border: 1px solid black;
+        }
+        .inp-value{
+            margin: 10px 10px;
+        }
+        .qimg{
+            width: 100%;
+            height: 100%;
+        }
+        .submit-btn{
+            align-items: center;
+            margin: 0px 20px;
+        }
+        #req-btn{
+            width: 150px;
+        }
+        .forms{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-layout">
+        <div class="main-container">
+            <h2>QR Code</h2>
+            <h4>Selected ID : {{ id }}</h4>
+            <div class="qr-img">
+                <div class="qimg" id="imgg">
+                    <img src="{% static image_url %}" style="width: 100%; height: 100%">
+                </div>
+            </div>
+            <!--
+            <div class="inp-value">
+
+            </div>
+            <div class="submit-btn">
+            -->
+            <form action="{% url 'test:index_page'  %}" method="post" class="forms">
+                {% csrf_token %}
+                <div class="inp-value">
+                    <label for="param">Enter product id | </label>
+                    <input name="product_id" type="number" id="param" min="1" max="100" step="1" width="50px" style="width: 100px">
+                </div>
+                <div class="submit-btn">
+                    <button type="submit" id="req-btn">Request</button>
+                </div>
+            </form>
+            <!--</div> -->
+        </div>
+    </div>
+</body>
+</html>
